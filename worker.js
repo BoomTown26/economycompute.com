@@ -1,14 +1,7 @@
-/**
- * Cloudflare Worker — EconomyCompute static site server
- *
- * Serves static assets from KV with:
- * - Clean URL routing (/audit → /audit.html, /blog/ → /blog/index.html)
- * - Security headers (CSP, X-Frame-Options, etc.)
- * - Custom 404 page
- * - Cache-Control for assets
- */
-
 import { getAssetFromKV } from '@cloudflare/kv-asset-handler';
+import manifestJSON from '__STATIC_CONTENT_MANIFEST';
+
+const assetManifest = JSON.parse(manifestJSON);
 
 const SECURITY_HEADERS = {
   'X-Content-Type-Options': 'nosniff',
@@ -16,7 +9,6 @@ const SECURITY_HEADERS = {
   'X-XSS-Protection': '1; mode=block',
   'Referrer-Policy': 'strict-origin-when-cross-origin',
   'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
-  'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://economycompute-api.neil-chadda.workers.dev https://script.google.com;",
 };
 
 function addHeaders(response) {
@@ -27,8 +19,18 @@ function addHeaders(response) {
   return newResponse;
 }
 
+async function getAsset(request, ctx) {
+  return await getAssetFromKV(
+    { request, waitUntil: ctx.waitUntil.bind(ctx) },
+    { ASSET_NAMESPACE: ctx.__STATIC_CONTENT, ASSET_MANIFEST: assetManifest }
+  );
+}
+
 export default {
   async fetch(request, env, ctx) {
+    // Bind the static content namespace for the asset handler
+    ctx.__STATIC_CONTENT = env.__STATIC_CONTENT;
+
     const url = new URL(request.url);
     let { pathname } = url;
 
@@ -39,37 +41,23 @@ export default {
 
     try {
       // Try exact path first
-      let response = await getAssetFromKV(
-        { request, waitUntil: ctx.waitUntil.bind(ctx) },
-        {}
-      );
-      return addHeaders(response);
+      return addHeaders(await getAsset(request, ctx));
     } catch (e) {
       // Clean URLs: try appending .html
       try {
         const htmlRequest = new Request(`${url.origin}${pathname}.html`, request);
-        let response = await getAssetFromKV(
-          { request: htmlRequest, waitUntil: ctx.waitUntil.bind(ctx) },
-          {}
-        );
-        return addHeaders(response);
+        return addHeaders(await getAsset(htmlRequest, ctx));
       } catch (e2) {
         // Try as directory with index.html
         try {
-          const dirRequest = new Request(`${url.origin}${pathname}/index.html`, request);
-          let response = await getAssetFromKV(
-            { request: dirRequest, waitUntil: ctx.waitUntil.bind(ctx) },
-            {}
-          );
-          return addHeaders(response);
+          const trailingSlash = pathname.endsWith('/') ? '' : '/';
+          const dirRequest = new Request(`${url.origin}${pathname}${trailingSlash}index.html`, request);
+          return addHeaders(await getAsset(dirRequest, ctx));
         } catch (e3) {
           // Serve 404 page
           try {
             const notFoundRequest = new Request(`${url.origin}/404.html`, request);
-            let response = await getAssetFromKV(
-              { request: notFoundRequest, waitUntil: ctx.waitUntil.bind(ctx) },
-              {}
-            );
+            let response = await getAsset(notFoundRequest, ctx);
             return addHeaders(new Response(response.body, { ...response, status: 404 }));
           } catch (e4) {
             return new Response('Not Found', { status: 404 });
