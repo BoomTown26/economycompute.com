@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EconomyCompute — Free AI Cloud Cost Audit | Cut Your Cloud Bill</title>
+<meta name="description" content="Free AI-powered cloud cost audit. We analyse your AWS, Azure or GCP spend, find savings of 30-60%, and place your workloads with cheaper UK data centre partners. You pay nothing.">
+<meta name="keywords" content="cloud cost reduction, AWS cost optimisation, cloud audit, UK data centre, GPU inference, cloud savings, compute placement, AI infrastructure">
+<link rel="canonical" href="https://economycompute.com/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://economycompute.com/">
+<meta property="og:title" content="EconomyCompute — Free AI Cloud Cost Audit">
+<meta property="og:description" content="Upload your cloud bill. Our AI finds savings of 30-60% and places your workloads with cheaper data centre partners. You pay nothing.">
+<meta property="og:image" content="https://economycompute.com/og-image.png">
+<meta property="og:site_name" content="EconomyCompute">
+<meta property="og:locale" content="en_GB">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="EconomyCompute — Free AI Cloud Cost Audit">
+<meta name="twitter:description" content="Upload your cloud bill. Our AI finds savings of 30-60% and places your workloads with cheaper data centre partners. You pay nothing.">
+<meta name="twitter:image" content="https://economycompute.com/og-image.png">
+
+<!-- Favicon -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+
+<!-- Preconnect -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "EconomyCompute",
+  "url": "https://economycompute.com",
+  "description": "AI-powered compute audit and placement firm. Free cloud cost analysis, workload migration to partner data centres.",
+  "logo": "https://economycompute.com/logo.png",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "hello@economycompute.com",
+    "contactType": "sales"
+  },
+  "sameAs": []
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Free Cloud Cost Audit",
+  "provider": {
+    "@type": "Organization",
+    "name": "EconomyCompute"
+  },
+  "description": "AI-powered analysis of your cloud spend across AWS, Azure, and GCP. Identifies savings opportunities and recommends cheaper data centre placements.",
+  "areaServed": "Worldwide",
+  "serviceType": "Cloud Cost Optimisation",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "GBP",
+    "description": "Free AI-generated cloud cost audit report"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does the cloud audit cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nothing. The audit is completely free. We earn revenue from data centre partners when we place workloads, not from you."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much can I save on my cloud bill?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most companies find savings of 30-60% on non-critical workloads like dev/staging environments, batch jobs, CI/CD pipelines, and AI inference."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What cloud providers do you analyse?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We analyse bills from AWS, Azure, GCP, and other major cloud providers. Upload any cloud bill in CSV or PDF format."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to change my code to migrate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Your containers and applications run exactly as they are. We handle the migration and placement — your code doesn't change."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does EconomyCompute make money?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our partner data centres pay us a commission for placing workloads with them. You pay nothing — our incentives are aligned with saving you money."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --heat-1: #FF4D00;
+    --heat-2: #FF8A00;
+    --heat-3: #FFBA42;
+    --cool-1: #0A1628;
+    --cool-2: #0F2440;
+    --cool-3: #1A3A5C;
+    --water: #2EC4B6;
+    --water-light: #3EDFD0;
+    --text: #E8EDF3;
+    --text-muted: #8A9BB5;
+    --surface: #0D1B2A;
+    --surface-elevated: #132238;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cool-1);
+    color: var(--text);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ── Navigation ── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(20px);
+    background: rgba(10, 22, 40, 0.7);
+    border-bottom: 1px solid rgba(46, 196, 182, 0.08);
+  }
+
+  .logo {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.6rem;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .logo-mark {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--heat-1), var(--heat-2), var(--water));
+    position: relative;
+    overflow: hidden;
+  }
+  .logo-mark::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 5px;
+    background: var(--cool-1);
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  .btn-nav {
+    padding: 0.6rem 1.5rem;
+    background: linear-gradient(135deg, var(--heat-1), var(--heat-2));
+    border: none;
+    color: white;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .btn-nav:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(255, 77, 0, 0.25);
+  }
+
+  /* ── Hero ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 3rem 4rem;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    right: -15%;
+    width: 70vw;
+    height: 70vw;
+    max-width: 900px;
+    max-height: 900px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, rgba(255, 77, 0, 0.12), rgba(255, 138, 0, 0.06) 40%, rgba(46, 196, 182, 0.04) 65%, transparent 80%);
+    filter: blur(60px);
+    animation: orbPulse 8s ease-in-out infinite;
+  }
+
+  @keyframes orbPulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.05); opacity: 1; }
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 3rem;
+    bottom: 0;
+    width: 40%;
+    background-image:
+      linear-gradient(rgba(46, 196, 182, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(46, 196, 182, 0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 70% at 70% 50%, black 20%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 70% 50%, black 20%, transparent 70%);
+  }
+
+  .hero-content {
+    max-width: 780px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 1rem;
+    background: rgba(46, 196, 182, 0.08);
+    border: 1px solid rgba(46, 196, 182, 0.15);
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--water);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--water);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .hero h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.8rem;
+    animation: fadeUp 0.8s ease 0.1s both;
+  }
+
+  .hero h1 .gradient-text {
+    background: linear-gradient(135deg, var(--heat-1), var(--heat-2), var(--heat-3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--water);
+    -webkit-text-fill-color: var(--water);
+  }
+
+  .hero-sub {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    max-width: 560px;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    animation: fadeUp 0.8s ease 0.3s both;
+  }
+
+  .btn-primary {
+    padding: 0.85rem 2rem;
+    background: linear-gradient(135deg, var(--heat-1), var(--heat-2));
+    border: none;
+    color: white;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    display: inline-block;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(255, 77, 0, 0.25);
+  }
+
+  .btn-secondary {
+    padding: 0.85rem 2rem;
+    background: var(--surface-elevated);
+    border: 1px solid rgba(138, 155, 181, 0.15);
+    color: var(--text);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-secondary:hover {
+    background: rgba(138, 155, 181, 0.1);
+    border-color: rgba(138, 155, 181, 0.3);
+  }
+
+  /* ── Stats bar ── */
+  .stats-bar {
+    display: flex;
+    gap: 0;
+    margin-top: 5rem;
+    border-top: 1px solid rgba(138, 155, 181, 0.1);
+    animation: fadeUp 0.8s ease 0.4s both;
+  }
+  .stat {
+    flex: 1;
+    padding: 2rem 0;
+    border-right: 1px solid rgba(138, 155, 181, 0.1);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-value {
+    font-family: 'Instrument Serif', serif;
+    font-size: 2.2rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.3rem;
+  }
+  .stat-value .accent { color: var(--water); }
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Section shared ── */
+  section {
+    padding: 7rem 3rem;
+    position: relative;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--water);
+    margin-bottom: 1.2rem;
+  }
+
+  .section-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    max-width: 650px;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-desc {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    max-width: 550px;
+    margin-bottom: 3.5rem;
+  }
+
+  /* ── How It Works ── */
+  .how-it-works {
+    background: var(--surface);
+    border-top: 1px solid rgba(138, 155, 181, 0.06);
+    border-bottom: 1px solid rgba(138, 155, 181, 0.06);
+  }
+
+  .flow {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(138, 155, 181, 0.06);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .flow-step {
+    background: var(--cool-1);
+    padding: 2.5rem;
+    position: relative;
+  }
+
+  .flow-num {
+    font-family: 'Instrument Serif', serif;
+    font-size: 4rem;
+    line-height: 1;
+    color: rgba(138, 155, 181, 0.08);
+    margin-bottom: 1.2rem;
+  }
+
+  .flow-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.2rem;
+    font-size: 1.4rem;
+  }
+  .flow-step:nth-child(1) .flow-icon { background: rgba(255, 77, 0, 0.1); }
+  .flow-step:nth-child(2) .flow-icon { background: rgba(255, 186, 66, 0.1); }
+  .flow-step:nth-child(3) .flow-icon { background: rgba(46, 196, 182, 0.1); }
+
+  .flow-step h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.01em;
+  }
+  .flow-step p {
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  .flow-step:not(:last-child)::after {
+    content: '\2192';
+    position: absolute;
+    right: -14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    z-index: 2;
+    background: var(--cool-1);
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid rgba(138, 155, 181, 0.1);
+  }
+
+  /* ── Upload teaser ── */
+  .audit-teaser {
+    background: var(--surface);
+    border-top: 1px solid rgba(138, 155, 181, 0.06);
+    border-bottom: 1px solid rgba(138, 155, 181, 0.06);
+    text-align: center;
+  }
+
+  .upload-zone {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    border: 2px dashed rgba(46, 196, 182, 0.25);
+    border-radius: 16px;
+    background: rgba(46, 196, 182, 0.03);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .upload-zone:hover {
+    border-color: var(--water);
+    background: rgba(46, 196, 182, 0.06);
+    transform: translateY(-2px);
+  }
+  .upload-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  .upload-zone h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .upload-zone p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+  .upload-formats {
+    margin-top: 1rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ── Value Props ── */
+  .value-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-width: 1000px;
+  }
+
+  .value-card {
+    padding: 2.2rem;
+    background: var(--surface-elevated);
+    border: 1px solid rgba(138, 155, 181, 0.06);
+    border-radius: 14px;
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+  .value-card:hover {
+    border-color: rgba(46, 196, 182, 0.15);
+    transform: translateY(-3px);
+  }
+  .value-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--water), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .value-card:hover::before { opacity: 1; }
+
+  .value-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .value-card p {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+  .value-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  /* ── Partners ── */
+  .partners-section {
+    background: var(--surface);
+    border-top: 1px solid rgba(138, 155, 181, 0.06);
+    border-bottom: 1px solid rgba(138, 155, 181, 0.06);
+    text-align: center;
+  }
+  .partner-cta {
+    display: inline-flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  /* ── FAQ ── */
+  .faq-list {
+    max-width: 700px;
+  }
+  .faq-item {
+    border-bottom: 1px solid rgba(138, 155, 181, 0.1);
+    padding: 1.8rem 0;
+  }
+  .faq-item:first-child { border-top: 1px solid rgba(138, 155, 181, 0.1); }
+  .faq-q {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    cursor: pointer;
+  }
+  .faq-a {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    text-align: center;
+    padding: 8rem 3rem;
+    position: relative;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60vw;
+    height: 60vw;
+    max-width: 700px;
+    max-height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 77, 0, 0.06), rgba(46, 196, 182, 0.03) 50%, transparent 70%);
+    filter: blur(60px);
+  }
+
+  .cta-section .section-title {
+    margin: 0 auto 1rem;
+    text-align: center;
+  }
+  .cta-section .section-desc {
+    margin: 0 auto 2.5rem;
+    text-align: center;
+  }
+
+  /* ── Footer ── */
+  footer {
+    padding: 3rem;
+    border-top: 1px solid rgba(138, 155, 181, 0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-left {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+  }
+  .footer-links a {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--text); }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section, .hero { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .flow { grid-template-columns: 1fr; }
+    .flow-step:not(:last-child)::after { display: none; }
+    .value-grid { grid-template-columns: 1fr; }
+    .stats-bar { flex-direction: column; }
+    .stat { border-right: none; border-bottom: 1px solid rgba(138, 155, 181, 0.1); padding: 1.2rem 0; }
+    .stat:last-child { border-bottom: none; }
+    .hero-actions { flex-direction: column; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    .partner-cta { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <a href="/" class="logo" aria-label="EconomyCompute home">
+    <div class="logo-mark"></div>
+    EconomyCompute
+  </a>
+  <div class="nav-links">
+    <a href="#how">How It Works</a>
+    <a href="#why">Why Us</a>
+    <a href="#partners">Partners</a>
+    <a href="#faq">FAQ</a>
+    <a href="/audit" class="btn-nav">Free Cloud Audit</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<main>
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Free AI-Powered Audit</div>
+    <h1>
+      Your cloud bill is <span class="gradient-text">too high.</span><br>
+      We'll <em>prove it.</em>
+    </h1>
+    <p class="hero-sub">
+      Upload your AWS, Azure, or GCP bill. Our AI analyses every line item, finds savings of 30–60%, and places your workloads with cheaper data centre partners. You pay nothing — ever.
+    </p>
+    <div class="hero-actions">
+      <a href="/audit" class="btn-primary">Get Your Free Audit</a>
+      <a href="#how" class="btn-secondary">See How It Works</a>
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-value">30–60<span class="accent">%</span></div>
+      <div class="stat-label">Typical Savings Found</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value"><span class="accent">0</span></div>
+      <div class="stat-label">Cost To You</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">&lt;5<span class="accent">min</span></div>
+      <div class="stat-label">To Get Your Report</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">AI<span class="accent">+</span>Human</div>
+      <div class="stat-label">Expert Review</div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="how-it-works" id="how">
+  <div class="section-label">How It Works</div>
+  <h2 class="section-title">Three steps to a lower cloud bill.</h2>
+  <p class="section-desc">
+    We analyse your spend, show you exactly where you're overpaying, and handle the migration. Our partner data centres pay us — you just save money.
+  </p>
+
+  <div class="flow">
+    <div class="flow-step">
+      <div class="flow-icon" aria-hidden="true">&#x1F4CA;</div>
+      <div class="flow-num">01</div>
+      <h3>Upload Your Bill</h3>
+      <p>Drop your AWS, Azure, or GCP bill — CSV or PDF. Our AI parses every line item and classifies each workload as critical or moveable.</p>
+    </div>
+    <div class="flow-step">
+      <div class="flow-icon" aria-hidden="true">&#x1F50D;</div>
+      <div class="flow-num">02</div>
+      <h3>AI Finds Savings</h3>
+      <p>We compare your costs against live pricing from our partner data centres and inference providers. You get a detailed report showing exactly where you can save — and how much.</p>
+    </div>
+    <div class="flow-step">
+      <div class="flow-icon" aria-hidden="true">&#x1F680;</div>
+      <div class="flow-num">03</div>
+      <h3>We Place &amp; Migrate</h3>
+      <p>Approve the plan and we handle everything. Your workloads move to cheaper partners. No code changes, no disruption. You just pay less.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Audit Teaser -->
+<section class="audit-teaser" id="audit-teaser">
+  <div class="section-label">Try It Now</div>
+  <h2 class="section-title" style="margin: 0 auto 1rem; text-align: center;">See what you're overspending in under 5 minutes.</h2>
+  <p class="section-desc" style="margin: 0 auto 2.5rem; text-align: center;">
+    Upload your cloud bill and our AI instantly identifies savings opportunities. No signup required.
+  </p>
+
+  <a href="/audit" class="upload-zone" style="display: block; text-decoration: none; color: inherit;">
+    <div class="upload-icon" aria-hidden="true">&#x2601;&#xFE0F;</div>
+    <h3>Drop your cloud bill here</h3>
+    <p>Or click to upload and start your free audit</p>
+    <div class="upload-formats">Supports AWS, Azure, GCP — CSV or PDF</div>
+  </a>
+</section>
+
+<!-- Why EconomyCompute -->
+<section id="why">
+  <div class="section-label">Why EconomyCompute</div>
+  <h2 class="section-title">You save money. We earn from partners. Incentives aligned.</h2>
+  <p class="section-desc">
+    We don't charge you a penny. Our partner data centres pay us a commission for placing workloads with them. The more you save, the more we earn.
+  </p>
+
+  <div class="value-grid">
+    <div class="value-card">
+      <div class="value-icon" aria-hidden="true">&#x1F4B0;</div>
+      <h3>Completely Free Audit</h3>
+      <p>No hidden fees, no commitments. Upload your bill, get a detailed savings report. If you don't proceed, you've lost nothing — and you still know where your money goes.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon" aria-hidden="true">&#x1F91D;</div>
+      <h3>Aligned Incentives</h3>
+      <p>We only earn when we place workloads with our partners. That means we're motivated to find you the biggest savings possible — not to upsell you on services you don't need.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon" aria-hidden="true">&#x1F9E0;</div>
+      <h3>AI-Powered Analysis</h3>
+      <p>Our AI parses every line item on your bill, classifies workloads by criticality, and compares live pricing across dozens of providers. No spreadsheets, no guesswork.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon" aria-hidden="true">&#x1F504;</div>
+      <h3>Zero Code Changes</h3>
+      <p>Your containers and applications run exactly as they are. We handle provider selection, networking, and migration. Your code doesn't change.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon" aria-hidden="true">&#x1F1EC;&#x1F1E7;</div>
+      <h3>UK Data Centre Network</h3>
+      <p>Access a growing network of UK-based data centres offering competitive pricing on inference, training, and general compute. Data sovereignty included.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon" aria-hidden="true">&#x26A1;</div>
+      <h3>Inference Partners</h3>
+      <p>We partner with specialist inference providers who can run your AI workloads at a fraction of hyperscaler pricing. Same models, same performance, lower cost.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Partners Section -->
+<section class="partners-section" id="partners">
+  <div class="section-label">For Data Centres &amp; Inference Providers</div>
+  <h2 class="section-title" style="margin: 0 auto 1rem; text-align: center;">We send you clients. You pay us commission.</h2>
+  <p class="section-desc" style="margin: 0 auto 2rem; text-align: center;">
+    EconomyCompute is a lead generation and placement engine for data centres and inference providers. We bring qualified clients with real workloads — ready to deploy. Join our partner network.
+  </p>
+  <div class="partner-cta">
+    <a href="mailto:partners@economycompute.com" class="btn-primary">Become a Partner</a>
+    <a href="#how" class="btn-secondary">Learn More</a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-label">Frequently Asked Questions</div>
+  <h2 class="section-title">Everything you need to know.</h2>
+
+  <div class="faq-list">
+    <div class="faq-item">
+      <h3 class="faq-q">How much does the cloud audit cost?</h3>
+      <p class="faq-a">Nothing. The audit is completely free. We earn revenue from data centre partners when we place workloads, not from you.</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">How much can I save on my cloud bill?</h3>
+      <p class="faq-a">Most companies find savings of 30–60% on non-critical workloads like dev/staging environments, batch jobs, CI/CD pipelines, and AI inference.</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">What cloud providers do you analyse?</h3>
+      <p class="faq-a">We analyse bills from AWS, Azure, GCP, and other major cloud providers. Upload any cloud bill in CSV or PDF format.</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">Do I need to change my code to migrate?</h3>
+      <p class="faq-a">No. Your containers and applications run exactly as they are. We handle the migration and placement — your code doesn't change.</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">How does EconomyCompute make money?</h3>
+      <p class="faq-a">Our partner data centres pay us a commission for placing workloads with them. You pay nothing. Our incentives are fully aligned with saving you money.</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">Is my billing data secure?</h3>
+      <p class="faq-a">Yes. Your bill is analysed in real-time and never stored. We process the data to generate your report and then discard it. No data retention, no sharing.</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">What types of workloads can be moved?</h3>
+      <p class="faq-a">Dev/staging environments, batch processing, ML training and inference, CI/CD runners, analytics pipelines, and any workload that doesn't require five-nines uptime. Our AI classifies each workload and only recommends moving what's safe to move.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="section-label">Get Started</div>
+  <h2 class="section-title">Stop overpaying for cloud. Get your free audit now.</h2>
+  <p class="section-desc">
+    Upload your bill, see your savings in minutes. No signup, no commitment, no cost. If we can save you money, we'll show you exactly how.
+  </p>
+  <div class="hero-actions" style="justify-content: center;">
+    <a href="/audit" class="btn-primary">Get Your Free Audit</a>
+    <a href="mailto:hello@economycompute.com" class="btn-secondary">Talk to Us</a>
+  </div>
+</section>
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-left">
+    <span style="font-family: 'Instrument Serif', serif; font-size: 1.1rem;">EconomyCompute</span>
+    &nbsp;&middot;&nbsp; &copy; 2026
+  </div>
+  <div class="footer-links">
+    <a href="/audit">Free Audit</a>
+    <a href="#faq">FAQ</a>
+    <a href="mailto:hello@economycompute.com">Contact</a>
+    <a href="#partners">Partner With Us</a>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found — EconomyCompute</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --heat-1: #FF4D00; --heat-2: #FF8A00;
+    --cool-1: #0A1628; --water: #2EC4B6;
+    --text: #E8EDF3; --text-muted: #8A9BB5;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif; background: var(--cool-1);
+    color: var(--text); min-height: 100vh; display: flex;
+    flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 2rem;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(4rem, 10vw, 8rem);
+    letter-spacing: -0.04em;
+    background: linear-gradient(135deg, var(--heat-1), var(--heat-2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; margin-bottom: 1rem;
+  }
+  p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem; max-width: 400px; line-height: 1.6; }
+  .links { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+  a {
+    padding: 0.75rem 1.5rem; border-radius: 8px;
+    font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.3s;
+  }
+  .btn-home {
+    background: linear-gradient(135deg, var(--heat-1), var(--heat-2)); color: white;
+  }
+  .btn-home:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255, 77, 0, 0.25); }
+  .btn-audit {
+    background: transparent; border: 1px solid var(--water); color: var(--water);
+  }
+  .btn-audit:hover { background: var(--water); color: var(--cool-1); }
+</style>
+</head>
+<body>
+  <h1>404</h1>
+  <p>This page doesn't exist. But your cloud savings might — let's find out.</p>
+  <div class="links">
+    <a href="/" class="btn-home">Back to Home</a>
+    <a href="/audit" class="btn-audit">Free Cloud Audit</a>
+  </div>
+</body>
+</html>

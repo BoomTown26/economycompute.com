@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Cloud Cost Audit — Upload Your Bill | EconomyCompute</title>
+<meta name="description" content="Upload your AWS, Azure or GCP bill and get an instant AI-powered savings report. See exactly where you're overspending and how much you could save with cheaper data centre partners.">
+<link rel="canonical" href="https://economycompute.com/audit">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://economycompute.com/audit">
+<meta property="og:title" content="Free Cloud Cost Audit — Upload Your Bill | EconomyCompute">
+<meta property="og:description" content="Upload your cloud bill and get an instant AI-powered savings report. See exactly where you're overspending.">
+<meta property="og:image" content="https://economycompute.com/og-image.png">
+<meta property="og:site_name" content="EconomyCompute">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free Cloud Cost Audit — Upload Your Bill">
+<meta name="twitter:description" content="Upload your cloud bill and get an instant AI-powered savings report.">
+<meta name="twitter:image" content="https://economycompute.com/og-image.png">
+
+<!-- Favicon -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+
+<!-- Preconnect -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "EconomyCompute Cloud Audit",
+  "url": "https://economycompute.com/audit",
+  "description": "Free AI-powered cloud cost analysis tool. Upload your AWS, Azure or GCP bill to see savings opportunities.",
+  "applicationCategory": "BusinessApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "GBP"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "EconomyCompute"
+  }
+}
+</script>
+
+<style>
+  :root {
+    --heat-1: #FF4D00; --heat-2: #FF8A00; --heat-3: #FFBA42;
+    --cool-1: #0A1628; --cool-2: #0F2440; --cool-3: #1A3A5C;
+    --water: #2EC4B6; --water-light: #3EDFD0;
+    --text: #E8EDF3; --text-muted: #8A9BB5;
+    --surface: #0D1B2A; --surface-elevated: #132238;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cool-1);
+    color: var(--text);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.5rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    backdrop-filter: blur(20px);
+    background: rgba(10, 22, 40, 0.7);
+    border-bottom: 1px solid rgba(46, 196, 182, 0.08);
+  }
+  .logo {
+    font-family: 'Instrument Serif', serif; font-size: 1.6rem;
+    letter-spacing: -0.02em; color: var(--text); text-decoration: none;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .logo-mark {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--heat-1), var(--heat-2), var(--water));
+    position: relative; overflow: hidden;
+  }
+  .logo-mark::after {
+    content: ''; position: absolute; inset: 3px;
+    border-radius: 5px; background: var(--cool-1);
+  }
+  .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+  .nav-links a {
+    color: var(--text-muted); text-decoration: none;
+    font-size: 0.88rem; font-weight: 500; letter-spacing: 0.03em; transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .btn-nav {
+    padding: 0.6rem 1.5rem;
+    background: linear-gradient(135deg, var(--heat-1), var(--heat-2));
+    border: none; color: white; border-radius: 6px;
+    font-size: 0.85rem; font-weight: 600; cursor: pointer;
+    transition: all 0.3s; text-decoration: none;
+  }
+  .btn-nav:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255, 77, 0, 0.25); }
+
+  .audit-header {
+    padding: 8rem 3rem 2rem;
+    text-align: center;
+  }
+  .audit-header h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+  .audit-header h1 em {
+    font-style: italic; color: var(--water);
+  }
+  .audit-header p {
+    font-size: 1.1rem; color: var(--text-muted);
+    max-width: 550px; margin: 0 auto; line-height: 1.6;
+  }
+
+  #audit-app {
+    padding: 2rem 3rem 6rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .trust-bar {
+    display: flex; gap: 2rem; justify-content: center;
+    padding: 1.5rem 3rem; color: var(--text-muted);
+    font-size: 0.82rem;
+  }
+  .trust-item { display: flex; align-items: center; gap: 0.4rem; }
+
+  footer {
+    padding: 3rem;
+    border-top: 1px solid rgba(138, 155, 181, 0.06);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-left { font-size: 0.82rem; color: var(--text-muted); }
+  .footer-links { display: flex; gap: 2rem; }
+  .footer-links a {
+    font-size: 0.82rem; color: var(--text-muted);
+    text-decoration: none; transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--text); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .audit-header, #audit-app { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .trust-bar { flex-direction: column; align-items: center; gap: 0.8rem; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo" aria-label="EconomyCompute home">
+    <div class="logo-mark"></div>
+    EconomyCompute
+  </a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/#how">How It Works</a>
+    <a href="/blog">Blog</a>
+    <a href="/audit" class="btn-nav">Free Cloud Audit</a>
+  </div>
+</nav>
+
+<main>
+  <header class="audit-header">
+    <h1>Upload your bill. See your <em>savings.</em></h1>
+    <p>Our AI analyses every line item on your cloud bill, classifies workloads by criticality, and shows you exactly where you can save — with live pricing from our partner network.</p>
+  </header>
+
+  <div class="trust-bar">
+    <div class="trust-item">&#x1F512; Your data is never stored</div>
+    <div class="trust-item">&#x26A1; Results in under 5 minutes</div>
+    <div class="trust-item">&#x1F4B0; 100% free, no signup required</div>
+  </div>
+
+  <!-- React bill analyser mounts here -->
+  <div id="audit-app"></div>
+</main>
+
+<footer>
+  <div class="footer-left">
+    <span style="font-family: 'Instrument Serif', serif; font-size: 1.1rem;">EconomyCompute</span>
+    &nbsp;&middot;&nbsp; &copy; 2026
+  </div>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/blog">Blog</a>
+    <a href="mailto:hello@economycompute.com">Contact</a>
+  </div>
+</footer>
+
+<!-- Load the bill analyser app -->
+<script type="module">
+  // The React bill analyser will be loaded here as a standalone bundle
+  // For now, show a placeholder upload zone
+  const app = document.getElementById('audit-app');
+  app.innerHTML = `
+    <div style="
+      max-width: 600px; margin: 0 auto; padding: 3rem 2rem;
+      border: 2px dashed rgba(46, 196, 182, 0.25); border-radius: 16px;
+      background: rgba(46, 196, 182, 0.03); text-align: center; cursor: pointer;
+      transition: all 0.3s;
+    " onmouseover="this.style.borderColor='#2EC4B6'; this.style.background='rgba(46, 196, 182, 0.06)'"
+       onmouseout="this.style.borderColor='rgba(46, 196, 182, 0.25)'; this.style.background='rgba(46, 196, 182, 0.03)'"
+    >
+      <div style="font-size: 3rem; margin-bottom: 1rem;">&#x2601;&#xFE0F;</div>
+      <h3 style="font-family: 'Instrument Serif', serif; font-size: 1.5rem; margin-bottom: 0.5rem;">Drop your cloud bill here</h3>
+      <p style="color: #8A9BB5; font-size: 0.9rem;">AWS Cost & Usage Report, Azure invoice, or GCP billing export</p>
+      <p style="margin-top: 1rem; font-size: 0.75rem; color: #8A9BB5; letter-spacing: 0.05em; text-transform: uppercase;">CSV or PDF — max 10MB</p>
+    </div>
+    <p style="text-align: center; margin-top: 2rem; color: #8A9BB5; font-size: 0.85rem;">
+      Full analyser loading soon. <a href="mailto:hello@economycompute.com" style="color: #2EC4B6;">Email us your bill</a> for a manual audit in the meantime.
+    </p>
+  `;
+</script>
+
+</body>
+</html>

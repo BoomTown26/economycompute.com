@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Cloud Cost Optimisation Guides & Insights | EconomyCompute</title>
+<meta name="description" content="Guides, benchmarks, and insights on reducing cloud costs, GPU inference pricing, AWS optimisation, and UK data centre alternatives. From the EconomyCompute team.">
+<link rel="canonical" href="https://economycompute.com/blog/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://economycompute.com/blog/">
+<meta property="og:title" content="Blog — Cloud Cost Optimisation Guides | EconomyCompute">
+<meta property="og:description" content="Guides, benchmarks, and insights on reducing cloud costs, GPU inference pricing, and UK data centre alternatives.">
+<meta property="og:image" content="https://economycompute.com/og-image.png">
+<meta property="og:site_name" content="EconomyCompute">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Blog — Cloud Cost Optimisation Guides | EconomyCompute">
+<meta name="twitter:description" content="Guides, benchmarks, and insights on reducing cloud costs and UK data centre alternatives.">
+<meta name="twitter:image" content="https://economycompute.com/og-image.png">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "EconomyCompute Blog",
+  "url": "https://economycompute.com/blog/",
+  "description": "Cloud cost optimisation guides, GPU pricing benchmarks, and UK data centre insights.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "EconomyCompute",
+    "url": "https://economycompute.com"
+  }
+}
+</script>
+
+<style>
+  :root {
+    --heat-1: #FF4D00; --heat-2: #FF8A00; --heat-3: #FFBA42;
+    --cool-1: #0A1628; --cool-2: #0F2440; --cool-3: #1A3A5C;
+    --water: #2EC4B6; --water-light: #3EDFD0;
+    --text: #E8EDF3; --text-muted: #8A9BB5;
+    --surface: #0D1B2A; --surface-elevated: #132238;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif; background: var(--cool-1);
+    color: var(--text); overflow-x: hidden; -webkit-font-smoothing: antialiased;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center;
+    backdrop-filter: blur(20px); background: rgba(10, 22, 40, 0.7);
+    border-bottom: 1px solid rgba(46, 196, 182, 0.08);
+  }
+  .logo {
+    font-family: 'Instrument Serif', serif; font-size: 1.6rem;
+    letter-spacing: -0.02em; color: var(--text); text-decoration: none;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .logo-mark {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--heat-1), var(--heat-2), var(--water));
+    position: relative; overflow: hidden;
+  }
+  .logo-mark::after { content: ''; position: absolute; inset: 3px; border-radius: 5px; background: var(--cool-1); }
+  .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.03em; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--text); }
+  .btn-nav {
+    padding: 0.6rem 1.5rem; background: linear-gradient(135deg, var(--heat-1), var(--heat-2));
+    border: none; color: white; border-radius: 6px; font-size: 0.85rem; font-weight: 600;
+    cursor: pointer; transition: all 0.3s; text-decoration: none;
+  }
+  .btn-nav:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255, 77, 0, 0.25); }
+
+  .blog-header {
+    padding: 8rem 3rem 3rem; max-width: 800px; margin: 0 auto;
+  }
+  .blog-header h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: -0.03em; margin-bottom: 1rem;
+  }
+  .blog-header p {
+    font-size: 1.1rem; color: var(--text-muted); line-height: 1.6;
+  }
+
+  .blog-grid {
+    max-width: 800px; margin: 0 auto; padding: 0 3rem 6rem;
+    display: flex; flex-direction: column; gap: 1.5rem;
+  }
+
+  .blog-card {
+    padding: 2rem;
+    background: var(--surface-elevated);
+    border: 1px solid rgba(138, 155, 181, 0.06);
+    border-radius: 14px;
+    transition: all 0.3s;
+    text-decoration: none; color: inherit; display: block;
+    position: relative; overflow: hidden;
+  }
+  .blog-card:hover {
+    border-color: rgba(46, 196, 182, 0.15);
+    transform: translateY(-2px);
+  }
+  .blog-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--water), transparent);
+    opacity: 0; transition: opacity 0.4s;
+  }
+  .blog-card:hover::before { opacity: 1; }
+
+  .blog-card-meta {
+    display: flex; gap: 1rem; align-items: center;
+    font-size: 0.75rem; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;
+    margin-bottom: 0.8rem;
+  }
+  .blog-card-tag {
+    padding: 0.2rem 0.6rem; background: rgba(46, 196, 182, 0.1);
+    border-radius: 4px; color: var(--water);
+  }
+  .blog-card h2 {
+    font-size: 1.25rem; font-weight: 600; letter-spacing: -0.01em;
+    margin-bottom: 0.5rem; line-height: 1.3;
+  }
+  .blog-card p {
+    font-size: 0.9rem; line-height: 1.65; color: var(--text-muted);
+  }
+  .blog-card-read {
+    display: inline-block; margin-top: 1rem;
+    font-size: 0.85rem; font-weight: 600; color: var(--water);
+  }
+
+  .blog-cta {
+    max-width: 800px; margin: 0 auto; padding: 0 3rem 6rem; text-align: center;
+  }
+  .blog-cta-box {
+    padding: 3rem 2rem; background: var(--surface-elevated);
+    border: 1px solid rgba(46, 196, 182, 0.1); border-radius: 16px;
+  }
+  .blog-cta-box h3 {
+    font-family: 'Instrument Serif', serif; font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+  }
+  .blog-cta-box p {
+    color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;
+  }
+  .btn-primary {
+    padding: 0.85rem 2rem; background: linear-gradient(135deg, var(--heat-1), var(--heat-2));
+    border: none; color: white; border-radius: 8px; font-size: 0.95rem; font-weight: 600;
+    cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255, 77, 0, 0.25); }
+
+  footer {
+    padding: 3rem; border-top: 1px solid rgba(138, 155, 181, 0.06);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-left { font-size: 0.82rem; color: var(--text-muted); }
+  .footer-links { display: flex; gap: 2rem; }
+  .footer-links a { font-size: 0.82rem; color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
+  .footer-links a:hover { color: var(--text); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .blog-header, .blog-grid, .blog-cta { padding-left: 1.5rem; padding-right: 1.5rem; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo" aria-label="EconomyCompute home">
+    <div class="logo-mark"></div>
+    EconomyCompute
+  </a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/#how">How It Works</a>
+    <a href="/blog">Blog</a>
+    <a href="/audit" class="btn-nav">Free Cloud Audit</a>
+  </div>
+</nav>
+
+<main>
+  <header class="blog-header">
+    <h1>Cloud Cost Insights</h1>
+    <p>Guides, benchmarks, and analysis on cutting cloud spend, GPU inference pricing, and UK data centre alternatives.</p>
+  </header>
+
+  <div class="blog-grid">
+    <a href="/blog/aws-cost-reduction-guide" class="blog-card">
+      <div class="blog-card-meta">
+        <span class="blog-card-tag">Guide</span>
+        <span>April 2026</span>
+        <span>8 min read</span>
+      </div>
+      <h2>The Complete Guide to Reducing Your AWS Bill in 2026</h2>
+      <p>Most companies overspend on AWS by 30-60%. Here's a systematic approach to identifying waste, right-sizing instances, and moving non-critical workloads to cheaper alternatives.</p>
+      <span class="blog-card-read">Read more &rarr;</span>
+    </a>
+
+    <a href="/blog/gpu-inference-pricing-compared" class="blog-card">
+      <div class="blog-card-meta">
+        <span class="blog-card-tag">Benchmark</span>
+        <span>April 2026</span>
+        <span>6 min read</span>
+      </div>
+      <h2>GPU Inference Pricing Compared: AWS vs Vast.ai vs UK Alternatives</h2>
+      <p>We benchmarked inference costs across major providers using real workloads. The price differences are staggering — up to 80% cheaper on specialist providers.</p>
+      <span class="blog-card-read">Read more &rarr;</span>
+    </a>
+
+    <a href="/blog/uk-data-centre-guide" class="blog-card">
+      <div class="blog-card-meta">
+        <span class="blog-card-tag">Industry</span>
+        <span>April 2026</span>
+        <span>5 min read</span>
+      </div>
+      <h2>Why UK Companies Are Moving Compute Out of Hyperscalers</h2>
+      <p>Data sovereignty, cost pressure, and a growing network of competitive UK data centres are driving a shift away from AWS, Azure, and GCP for non-critical workloads.</p>
+      <span class="blog-card-read">Read more &rarr;</span>
+    </a>
+
+    <a href="/blog/what-workloads-can-you-move-off-aws" class="blog-card">
+      <div class="blog-card-meta">
+        <span class="blog-card-tag">Guide</span>
+        <span>April 2026</span>
+        <span>7 min read</span>
+      </div>
+      <h2>What Workloads Can You Actually Move Off AWS?</h2>
+      <p>Not everything belongs on a hyperscaler — but not everything can leave. Here's how to classify your workloads and identify what's safe to migrate without risk.</p>
+      <span class="blog-card-read">Read more &rarr;</span>
+    </a>
+
+    <a href="/blog/cloud-cost-audit-what-to-expect" class="blog-card">
+      <div class="blog-card-meta">
+        <span class="blog-card-tag">Product</span>
+        <span>April 2026</span>
+        <span>4 min read</span>
+      </div>
+      <h2>What to Expect From a Free EconomyCompute Cloud Audit</h2>
+      <p>Upload your bill, get a report in minutes. Here's exactly what our AI analyses, how we classify workloads, and what your savings report looks like.</p>
+      <span class="blog-card-read">Read more &rarr;</span>
+    </a>
+  </div>
+
+  <div class="blog-cta">
+    <div class="blog-cta-box">
+      <h3>Stop reading about savings. See yours.</h3>
+      <p>Upload your cloud bill and get a free AI-powered savings report in under 5 minutes.</p>
+      <a href="/audit" class="btn-primary">Get Your Free Audit</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-left">
+    <span style="font-family: 'Instrument Serif', serif; font-size: 1.1rem;">EconomyCompute</span>
+    &nbsp;&middot;&nbsp; &copy; 2026
+  </div>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/audit">Free Audit</a>
+    <a href="mailto:hello@economycompute.com">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>

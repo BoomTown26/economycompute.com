@@ -1,0 +1,40 @@
+# EconomyCompute — llms.txt
+
+> AI-powered compute audit and placement firm. Free cloud cost analysis, workload migration to partner data centres.
+
+## About
+
+EconomyCompute analyses company cloud spend (AWS, Azure, GCP) using AI and identifies savings of 30-60%. Clients receive a free detailed report showing where they're overspending and which workloads can move to cheaper providers. If they proceed, EconomyCompute migrates workloads into its network of partner data centres and inference providers. Clients pay nothing — partner data centres pay EconomyCompute a commission for placement.
+
+## Services
+
+- Free AI-Powered Cloud Audit: Upload a cloud bill (CSV or PDF) and receive an instant savings report classifying every workload as critical or moveable with live pricing comparisons.
+- Workload Placement: Migration of non-critical workloads to cheaper UK data centre partners and specialist inference providers.
+- Ongoing Optimisation: Continuous monitoring and re-placement as pricing and workload profiles change.
+
+## Key Pages
+
+- Homepage: https://economycompute.com/
+- Free Cloud Audit Tool: https://economycompute.com/audit
+- Blog: https://economycompute.com/blog/
+
+## Business Model
+
+EconomyCompute earns commission from partner data centres when it places client workloads with them. The client pays nothing. This aligns incentives — EconomyCompute earns more by finding clients the biggest savings.
+
+## Target Audience
+
+- Companies overspending on AWS, Azure, or GCP
+- Teams running AI/ML inference on expensive hyperscaler GPU instances
+- Organisations seeking UK-based compute with data sovereignty
+- CTOs, VPs of Engineering, and DevOps leads looking to reduce infrastructure costs
+
+## Partner Network
+
+EconomyCompute partners with UK data centres and inference providers. Partners receive qualified leads with real workloads ready to deploy. Contact partners@economycompute.com to join.
+
+## Contact
+
+- Website: https://economycompute.com
+- Email: hello@economycompute.com
+- Partner enquiries: partners@economycompute.com
